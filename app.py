@@ -68,121 +68,53 @@ def get_semantic_results(qq):
 if search_text:
     results = get_semantic_results(search_text)
 
-    df = pd.json_normalize(results['data']['Get']['SKATESITERAG2'])
+    if results:
+        # Convert JSON data to DataFrame
+        df = pd.json_normalize(results['data']['Get']['SKATESITERAG2'])  # Replace 'YourClassName'
 
+        num_videos = len(df)
+        metrics_per_row = 2  # Set the number of columns per row for the grid
+        num_containers = (num_videos // metrics_per_row) + (num_videos % metrics_per_row > 0)
 
-    num_videos = len(df)
-    metrics_per_row = 2  # Adjust the number of videos per row as needed
-    num_rows = -(-num_videos // metrics_per_row)  # Ceiling division to ensure all videos are included
-    
-    for i in range(0, num_videos, metrics_per_row):
-        cols = st.columns(metrics_per_row)
-        for j in range(metrics_per_row):
-            video_index = i + j
-            if video_index < num_videos:
-                video_info = df.iloc[video_index]
-                # Unique key for each expander using video_index
-                expander_key = f"video_{video_index}_expander"
-                with cols[j]:
-                    with st.expander(f"{video_info['title']} ({video_info['videoType']})", expanded=True, key=expander_key):
-                        if pd.notnull(video_info['coverArtImageLink']):
-                            # Unique key for image
-                            image_key = f"image_{video_index}"
-                            st.image(video_info['coverArtImageLink'], caption="Cover Art", key=image_key)
-    
-                        if pd.notnull(video_info['youtubeLink']):
-                            # Unique key for video
-                            video_key = f"video_{video_index}"
-                            st.video(video_info['youtubeLink'], key=video_key)
-    
-                        st.markdown("### Video Information")
-                        st.write(f"**Title:** {video_info['title']}")
-                        st.write(f"**Full Length:** {video_info['fullLength']} minutes")
-                        st.write(f"**Video Type:** {video_info['videoType']}")
-    
-                        # Handling dictionaries and lists correctly
-                        if isinstance(video_info['production'], dict):
-                            production_info = ", ".join([f"{key}: {value}" for key, value in video_info['production'].items()])
-                            st.write(f"**Production:** {production_info}")
-                        else:
-                            st.write(f"**Production:** {video_info['production']}")
-    
-                        # Displaying lists as comma-separated strings
-                        if isinstance(video_info['skaters'], list):
-                            st.write("### Skaters")
-                            st.write(", ".join(video_info['skaters']))
-                        else:
-                            st.write(f"**Skaters:** {video_info['skaters']}")
-    
-                        if isinstance(video_info['locations'], list):
-                            st.write("### Locations")
-                            st.write(", ".join(video_info['locations']))
-                        else:
-                            st.write(f"**Locations:** {video_info['locations']}")
-    
-                        if isinstance(video_info['soundtrack'], list):
-                            st.write("### Soundtrack")
-                            for track in video_info['soundtrack']:
-                                st.write(f"- {track}")
-                        else:
-                            st.write(f"**Soundtrack:** {video_info['soundtrack']}")
-                    video_index += 1
-
-
-
-    
-
-
-
-    
-
-    # if results:
-    #     # Convert JSON data to DataFrame
-    #     df = pd.json_normalize(results['data']['Get']['SKATESITERAG2'])  # Replace 'YourClassName'
-
-    #     num_videos = len(df)
-    #     metrics_per_row = 2  # Set the number of columns per row for the grid
-    #     num_containers = (num_videos // metrics_per_row) + (num_videos % metrics_per_row > 0)
-
-    #     video_index = 0
-    #     for container_index in range(num_containers):
-    #         with st.container():
-    #             cols = st.columns(metrics_per_row)
-    #             for metric_index in range(metrics_per_row):
-    #                 if video_index < num_videos:
-    #                     video_info = df.iloc[video_index]
-    #                     with cols[metric_index]:
-    #                         with st.expander(f"{video_info['title']} ({video_info['videoType']})", expanded=True):
-    #                                                     # Displaying the cover art image if available
+        video_index = 0
+        for container_index in range(num_containers):
+            with st.container():
+                cols = st.columns(metrics_per_row)
+                for metric_index in range(metrics_per_row):
+                    if video_index < num_videos:
+                        video_info = df.iloc[video_index]
+                        with cols[metric_index]:
+                            with st.expander(f"{video_info['title']} ({video_info['videoType']})", expanded=True):
+                                                        # Displaying the cover art image if available
                                 
-    #                             if video_info['youtubeLink']:
-    #                                 st_player(video_info['youtubeLink'])
-    #                             # YouTube and Skate Site Links
+                                if video_info['youtubeLink']:
+                                    st_player(video_info['youtubeLink'])
+                                # YouTube and Skate Site Links
 
-    #                                 # st.image(video_info['coverArtImageLink'], caption="Cover Art")
-    #                             # YouTube and Skate Site Links
+                                    # st.image(video_info['coverArtImageLink'], caption="Cover Art")
+                                # YouTube and Skate Site Links
 
-    #                             st.write(f"**Cover Art Description:** {video_info['coverArt_description']}")
+                                st.write(f"**Cover Art Description:** {video_info['coverArt_description']}")
 
-    #                             st.write(f"**Skaters:** {video_info['skaters']}")
-    #                             st.subheader("Video Information:")
-    #                             st.write(f"**Title:** {video_info['title']}")
-    #                             st.write(f"**Full Length:** {video_info['fullLength']} minutes")
-    #                             st.write(f"**Video Type:** {video_info['videoType']}")
-    #                             # if video_info['youtubeLink']:
-    #                             #     st.markdown(f"[YouTube Link]({video_info['youtubeLink']})")
-    #                             #     st.video(video_info['youtubeLink'])
-    #                             # else:
-    #                             #   print("no link")
-    #                             st.write(f"**Production:** {video_info['production']}")
-    #                             st.write(f"**Watch Online Description:** {video_info['watchOnlineDescription']}")
-    #                             st.write(f"**Skater Cameo:** {video_info['skaterCameo']}")
-    #                             st.write(f"**Thrasher Cover:** {video_info['thrasherCover']}")
-    #                             st.write(f"**Locations:** {video_info['locations']}")
-    #                             st.write(f"**Soundtrack:** {video_info['soundtrack']}")
+                                st.write(f"**Skaters:** {video_info['skaters']}")
+                                st.subheader("Video Information:")
+                                st.write(f"**Title:** {video_info['title']}")
+                                st.write(f"**Full Length:** {video_info['fullLength']} minutes")
+                                st.write(f"**Video Type:** {video_info['videoType']}")
+                                # if video_info['youtubeLink']:
+                                #     st.markdown(f"[YouTube Link]({video_info['youtubeLink']})")
+                                #     st.video(video_info['youtubeLink'])
+                                # else:
+                                #   print("no link")
+                                st.write(f"**Production:** {video_info['production']}")
+                                st.write(f"**Watch Online Description:** {video_info['watchOnlineDescription']}")
+                                st.write(f"**Skater Cameo:** {video_info['skaterCameo']}")
+                                st.write(f"**Thrasher Cover:** {video_info['thrasherCover']}")
+                                st.write(f"**Locations:** {video_info['locations']}")
+                                st.write(f"**Soundtrack:** {video_info['soundtrack']}")
 
 
-    #                     video_index += 1
+                        video_index += 1
                                 
 
         # num_videos = len(df)
