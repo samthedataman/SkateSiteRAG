@@ -83,9 +83,7 @@ def get_semantic_results(qq):
               'skateSiteLink'
              ]).with_near_text({
             "concepts": [qq]}).with_limit(10).do()
-
-
-  return response,normal_response
+    return response,normal_response
 
 
 if search_text:
