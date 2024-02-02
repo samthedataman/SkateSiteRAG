@@ -72,6 +72,10 @@ if search_text:
         # Convert JSON data to DataFrame
         df = pd.json_normalize(results['data']['Get']['SKATESITERAG2'])  # Replace 'YourClassName'
 
+        df = df.explode('locations').reset_index(drop=True)
+        df = df.explode('soundtrack').reset_index(drop=True)
+        df = df.explode('production').reset_index(drop=True)
+
         num_videos = len(df)
         metrics_per_row = 3  # Set the number of columns per row for the grid
         num_containers = (num_videos // metrics_per_row) + (num_videos % metrics_per_row > 0)
