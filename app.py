@@ -100,12 +100,12 @@ if search_text:
                                         # st.image(video_info['coverArtImageLink'], caption="Cover Art")
                                     # YouTube and Skate Site Links
     
-                                    st.write(f"**Cover Art Description:** {video_info['coverArt_description']}")
+                                    st.write(f"{video_info['coverArt_description']}")
     
                                     st.write(f"**Skaters:** {video_info['skaters']}")
                                     st.subheader("Video Information:")
-                                    st.write(f"**Title:** {video_info['title']}")
-                                    st.write(f"**Full Length:** {video_info['fullLength']} minutes")
+                                    st.write(f"**Video Title:** {video_info['title']}")
+                                    st.write(f"**Video Length:** {video_info['fullLength']} minutes")
                                     st.write(f"**Video Type:** {video_info['videoType']}")
                                     # if video_info['youtubeLink']:
                                     #     st.markdown(f"[YouTube Link]({video_info['youtubeLink']})")
@@ -116,7 +116,25 @@ if search_text:
                                     st.write(f"**Watch Online Description:** {video_info['watchOnlineDescription']}")
                                     st.write(f"**Skater Cameo:** {video_info['skaterCameo']}")
                                     st.write(f"**Thrasher Cover:** {video_info['thrasherCover']}")
-                                    st.write(f"**Locations:** {video_info['locations']}")
+                                    locations_str = '\n'.join(video_info['locations'])
+                                    
+                                    st.write(f"**Locations:**\n{locations_str}")
+
+                                    soundtrack_data = []
+                                    
+                                    # Assuming 'soundtrack' is a list of soundtrack sections
+                                    for section in video_info['soundtrack']:
+                                        # Split the section name and soundtrack using ' - '
+                                        parts = section.split(' - ')
+                                        if len(parts) == 2:
+                                            section_name, soundtrack = parts
+                                            soundtrack_data.append({'Section': section_name, 'Soundtrack': soundtrack})
+                                        else:
+                                            # If there is no section name, just use 'Untitled Section'
+                                            soundtrack_data.append({'Section': 'Untitled Section', 'Soundtrack': section})
+                                    
+                                    # Create a DataFrame from the list of dictionaries
+                                    soundtrack_df = pd.DataFrame(soundtrack_data)
                                     st.write(f"**Soundtrack:** {video_info['soundtrack']}")
                                 except:
                                     print("Data may not reflect recent changes in skateboarding")
