@@ -32,7 +32,7 @@ client = weaviate.Client(
 num_results = 50  # Update this number as needed
 
 # Set page configuration
-st.set_page_config(page_title="Skate Video Search", layout="wide")
+st.set_page_config(page_title="The worlds best skate video search engine (powered by weaviate and openai)", layout="wide")
 
 # Streamlit app layout
 st.title("Skate Video Search")
