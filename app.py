@@ -89,7 +89,7 @@ if search_text:
                                                         # Displaying the cover art image if available
                                 
                                 if video_info['youtubeLink']:
-                                    st_player(video_info['youtubeLink']), caption="Cover Art")
+                                    st_player(video_info['youtubeLink'])
                                 # YouTube and Skate Site Links
 
                                     # st.image(video_info['coverArtImageLink'], caption="Cover Art")
