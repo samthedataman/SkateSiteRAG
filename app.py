@@ -73,7 +73,7 @@ if search_text:
         df = pd.json_normalize(results['data']['Get']['SKATESITERAG2'])  # Replace 'YourClassName'
 
         num_videos = len(df)
-        metrics_per_row = 2  # Set the number of columns per row for the grid
+        metrics_per_row = 3  # Set the number of columns per row for the grid
         num_containers = (num_videos // metrics_per_row) + (num_videos % metrics_per_row > 0)
 
         video_index = 0
