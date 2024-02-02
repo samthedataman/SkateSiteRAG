@@ -42,8 +42,46 @@ st.title("Skate Video Search")
 search_text = st.text_input("Search for a Skate Video, Skater, Place, Company, Product, or Song", placeholder="Enter a video title or attribute")
 
 def get_semantic_results(qq):
+    
+    where_filter = {
+      "operator": "Or",
+      "operands": [{
+            "path": ["wordCount"],
+            "operator": "GreaterThan",
+            "valueInt": 1000
+          }, {
+            "path": ["title"],
+            "operator": "Like",
+            "valueText": "*economy*",
+          }]
+    }
 
-  response = client.query.get("SKATESITERAG2",
+    normal_response = (
+        client.query
+        .get("SKATESITERAG2",
+         [
+        'title',
+        'fullLength',
+        'videoType',
+        'production',
+        'watchOnlineDescription',
+        'skaterCameo',
+        'thrasherCover',
+        'locations',
+        'soundtrack',
+        'skaters',
+        'coverArt_description',
+        'coverArtImageLink',
+        'youtubeLink',
+        'skateSiteLink'
+        ])
+        .with_where( 
+            "operator": "Or",
+              "operands": [{"path": ["title"],"operator": "Like","valueText": f"*{qq}*"},
+                            {"path": ["production"],"operator": "Like","valueText": f"*{qq}*"},
+                            {"path": ["skaters"],"operator": "Like","valueText": f"*{qq}*"}].with_limit(1000).do()
+    )
+    response = client.query.get("SKATESITERAG2",
             [ 'title', 
               'fullLength', 
               'videoType', 
@@ -59,18 +97,21 @@ def get_semantic_results(qq):
               'youtubeLink', 
               'skateSiteLink'
              ]).with_near_text({
-            "concepts": [qq]}).do()
+            "concepts": [qq]}).with_limit(10).do()
 
 
-  return response 
+  return response,normal_response
 
 
 if search_text:
-    results = get_semantic_results(search_text)
+    results,normal_results = get_semantic_results(search_text)
 
     if results:
         # Convert JSON data to DataFrame
-        df = pd.json_normalize(results['data']['Get']['SKATESITERAG2'])  # Replace 'YourClassName'
+        df_normal = pd.json_normalize(results['data']['Get']['SKATESITERAG2']) 
+        df = pd.json_normalize(results['data']['Get']['SKATESITERAG2'])  
+        
+        df = pd.concat([df_normal,df])
 
         df = df.explode('locations').reset_index(drop=True)
         df = df.explode('soundtrack').reset_index(drop=True)
