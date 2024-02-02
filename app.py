@@ -135,7 +135,7 @@ if search_text:
                                     
                                     # Create a DataFrame from the list of dictionaries
                                     soundtrack_df = pd.DataFrame(soundtrack_data)
-                                    st.write(f"**Soundtrack:** {video_info['soundtrack']}")
+                                    st.dataframe(soundtrack_df)
                                 except:
                                     print("Data may not reflect recent changes in skateboarding")
                                     continue
