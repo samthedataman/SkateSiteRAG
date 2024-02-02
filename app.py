@@ -61,7 +61,6 @@ def get_semantic_results(qq):
              ]).with_near_text({
             "concepts": [qq]}).do()
 
-  # df = pd.json_normalize(response['data']['Get']['SKATESITERAG2'])
 
   return response 
 
@@ -69,6 +68,7 @@ def get_semantic_results(qq):
 if search_text:
     results = get_semantic_results(search_text)
 
+    df = pd.json_normalize(results['data']['Get']['SKATESITERAG2'])
 
 
     num_videos = len(df)
