@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import requests
 from PIL import Image
 from io import BytesIO
+from streamlit_player import st_player
 
 # load_dotenv()
 
@@ -88,7 +89,8 @@ if search_text:
                                                         # Displaying the cover art image if available
                                 
                                 if video_info['coverArtImageLink']:
-                                    st.image(video_info['youtubeLink'], caption="Cover Art")
+                                    
+                                    st_player(video_info['youtubeLink'], caption="Cover Art")
                                     # st.video(video_info['youtubeLink'], format="video/mp4", start_time=0)
 
 
