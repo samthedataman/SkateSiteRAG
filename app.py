@@ -96,24 +96,33 @@ if search_text:
                             st.write(f"**Full Length:** {video_info['fullLength']} minutes")
                             st.write(f"**Video Type:** {video_info['videoType']}")
         
-                            if pd.notnull(video_info['production']):
+                            # Handling dictionaries and lists correctly
+                            if isinstance(video_info['production'], dict):
+                                production_info = ", ".join([f"{key}: {value}" for key, value in video_info['production'].items()])
+                                st.write(f"**Production:** {production_info}")
+                            else:
                                 st.write(f"**Production:** {video_info['production']}")
-                            if pd.notnull(video_info['watchOnlineDescription']):
-                                st.write(f"**Watch Online Description:** {video_info['watchOnlineDescription']}")
-                            if pd.notnull(video_info['skaterCameo']):
-                                st.write(f"**Skater Cameo:** {video_info['skaterCameo']}")
-                            if pd.notnull(video_info['thrasherCover']):
-                                st.write(f"**Thrasher Cover:** {video_info['thrasherCover']}")
         
-                            st.write("### Skaters")
-                            st.write(", ".join(video_info['skaters']))
+                            # Displaying lists as comma-separated strings
+                            if isinstance(video_info['skaters'], list):
+                                st.write("### Skaters")
+                                st.write(", ".join(video_info['skaters']))
+                            else:
+                                st.write(f"**Skaters:** {video_info['skaters']}")
         
-                            st.write("### Locations")
-                            st.write(", ".join(video_info['locations']))
+                            if isinstance(video_info['locations'], list):
+                                st.write("### Locations")
+                                st.write(", ".join(video_info['locations']))
+                            else:
+                                st.write(f"**Locations:** {video_info['locations']}")
         
-                            st.write("### Soundtrack")
-                            for track in video_info['soundtrack']:
-                                st.write(f"- {track}")
+                            if isinstance(video_info['soundtrack'], list):
+                                st.write("### Soundtrack")
+                                for track in video_info['soundtrack']:
+                                    st.write(f"- {track}")
+                            else:
+                                st.write(f"**Soundtrack:** {video_info['soundtrack']}")
+                        video_index += 1
     
         # num_videos = len(df)
         # metrics_per_row = 2  # Set the number of columns per row for the grid
