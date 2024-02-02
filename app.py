@@ -93,9 +93,9 @@ if search_text:
                                     st_player(video_info['youtubeLink'])
                                     # st.video(video_info['youtubeLink'], format="video/mp4", start_time=0)
 
-                                # YouTube and Skate Site Links
-                                elif video_info['coverArtImageLink']:
-                                    st.image(video_info['coverArtImageLink'], caption="Cover Art")
+                                # # YouTube and Skate Site Links
+                                # elif video_info['coverArtImageLink']:
+                                #     st.image(video_info['coverArtImageLink'], caption="Cover Art")
                                 # YouTube and Skate Site Links
     
                                 st.write(f"**Cover Art Description:** {video_info['coverArt_description']}")
