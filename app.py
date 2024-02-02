@@ -44,7 +44,7 @@ search_text = st.text_input("Search for a Skate Video, Skater, Place, Company, P
 def get_semantic_results(qq):
     
 
-    normal_response = (
+    normal_response = 
         client.query
         .get("SKATESITERAG2",
          ['title',
@@ -72,8 +72,7 @@ def get_semantic_results(qq):
     })
     .with_limit(1000)
     .do()
-)
-    )
+
     response = client.query.get("SKATESITERAG2",
             [ 'title', 
               'fullLength', 
