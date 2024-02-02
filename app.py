@@ -42,11 +42,7 @@ st.title("Skate Video Search")
 search_text = st.text_input("Search for a Skate Video, Skater, Place, Company, Product, or Song", placeholder="Enter a video title or attribute")
 
 def get_semantic_results(qq):
-    
-
-    normal_response = 
-        client.query
-        .get("SKATESITERAG2",
+    normal_response = client.query.get("SKATESITERAG2",
          ['title',
         'fullLength',
         'videoType',
@@ -61,17 +57,14 @@ def get_semantic_results(qq):
         'coverArtImageLink',
         'youtubeLink',
         'skateSiteLink'
-        ])
-    .with_where({
+        ]).with_where({
         "operator": "Or",
         "operands": [
             {"path": ["title"], "operator": "Like", "valueText": f"*{qq}*"},
             {"path": ["production"], "operator": "Like", "valueText": f"*{qq}*"},
             {"path": ["skaters"], "operator": "Like", "valueText": f"*{qq}*"}
         ]
-    })
-    .with_limit(1000)
-    .do()
+    }).with_limit(1000).do()
 
     response = client.query.get("SKATESITERAG2",
             [ 'title', 
