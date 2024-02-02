@@ -76,7 +76,7 @@ if search_text:
         num_videos = len(df)
         metrics_per_row = 2  # Set the number of columns per row for the grid
         num_containers = (num_videos // metrics_per_row) + (num_videos % metrics_per_row > 0)
-    
+
         video_index = 0
         for container_index in range(num_containers):
             with st.container():
@@ -89,11 +89,14 @@ if search_text:
                                                         # Displaying the cover art image if available
                                 
                                 if video_info['coverArtImageLink']:
-                                    st_player(video_info['youtubeLink'])
-                                    # st.video(video_info['youtubeLink'], format="video/mp4", start_time=0)
-                                
+                                    st.image(video_info['coverArtImageLink'], caption="Cover Art")
+                                # YouTube and Skate Site Links
+
+                                    # st.image(video_info['coverArtImageLink'], caption="Cover Art")
+                                # YouTube and Skate Site Links
+
                                 st.write(f"**Cover Art Description:** {video_info['coverArt_description']}")
-    
+
                                 st.write(f"**Skaters:** {video_info['skaters']}")
                                 st.subheader("Video Information:")
                                 st.write(f"**Title:** {video_info['title']}")
@@ -110,6 +113,9 @@ if search_text:
                                 st.write(f"**Thrasher Cover:** {video_info['thrasherCover']}")
                                 st.write(f"**Locations:** {video_info['locations']}")
                                 st.write(f"**Soundtrack:** {video_info['soundtrack']}")
+
+
+                        video_index += 1
                                 
 
         # num_videos = len(df)
