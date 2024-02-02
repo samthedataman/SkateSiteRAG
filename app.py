@@ -89,6 +89,9 @@ if search_text:
                                 
                                 if video_info['coverArtImageLink']:
                                     st.image(video_info['coverArtImageLink'], caption="Cover Art")
+                                    st.video(video_info['youtubeLink'], format="video/mp4", start_time=0)
+
+
                                 # YouTube and Skate Site Links
     
                                     # st.image(video_info['coverArtImageLink'], caption="Cover Art")
