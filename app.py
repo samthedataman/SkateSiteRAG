@@ -116,26 +116,10 @@ if search_text:
                                     st.write(f"**Watch Online Description:** {video_info['watchOnlineDescription']}")
                                     st.write(f"**Skater Cameo:** {video_info['skaterCameo']}")
                                     st.write(f"**Thrasher Cover:** {video_info['thrasherCover']}")
-                                    locations_str = '\n'.join(video_info['locations'])
-                                    
-                                    st.write(f"**Locations:**\n{locations_str}")
+                                    st.write(f"**Video Info:** {video_info['locations']}")
+                                    st.write(f"**Soundtracks:** {video_info['soundtrack']}")
 
-                                    soundtrack_data = []
                                     
-                                    # Assuming 'soundtrack' is a list of soundtrack sections
-                                    for section in video_info['soundtrack']:
-                                        # Split the section name and soundtrack using ' - '
-                                        parts = section.split(' - ')
-                                        if len(parts) == 2:
-                                            section_name, soundtrack = parts
-                                            soundtrack_data.append({'Section': section_name, 'Soundtrack': soundtrack})
-                                        else:
-                                            # If there is no section name, just use 'Untitled Section'
-                                            soundtrack_data.append({'Section': 'Untitled Section', 'Soundtrack': section})
-                                    
-                                    # Create a DataFrame from the list of dictionaries
-                                    soundtrack_df = pd.DataFrame(soundtrack_data)
-                                    st.dataframe(soundtrack_df)
                                 except:
                                     print("Data may not reflect recent changes in skateboarding")
                                     continue
