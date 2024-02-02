@@ -76,6 +76,9 @@ if search_text:
         df = df.explode('soundtrack').reset_index(drop=True)
         df = df.explode('production').reset_index(drop=True)
 
+        df[['Company', 'Year']] = df['production'].apply(pd.Series)
+
+
         num_videos = len(df)
         metrics_per_row = 3  # Set the number of columns per row for the grid
         num_containers = (num_videos // metrics_per_row) + (num_videos % metrics_per_row > 0)
@@ -88,7 +91,7 @@ if search_text:
                     if video_index < num_videos:
                         video_info = df.iloc[video_index]
                         with cols[metric_index]:
-                            with st.expander(f"{video_info['title']} ({video_info['videoType']}) [{video_info['production']}]", expanded=True):
+                            with st.expander(f"{video_info['title']} ({video_info['videoType']}) [{video_info['Year']}]", expanded=True):
                                                         # Displaying the cover art image if available
                                 try:
                                 
