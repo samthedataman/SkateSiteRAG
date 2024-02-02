@@ -90,7 +90,7 @@ if search_text:
                                 
                                 if video_info['coverArtImageLink']:
                                     
-                                    st_player(video_info['youtubeLink'], caption="Cover Art")
+                                    st_player(video_info['youtubeLink'])
                                     # st.video(video_info['youtubeLink'], format="video/mp4", start_time=0)
 
 
