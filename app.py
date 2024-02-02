@@ -115,36 +115,92 @@ if search_text:
                         with cols[metric_index]:
                             with st.expander(f"{video_info['title']} - ({video_info['videoType']})", expanded=True):
                                                         # Displaying the cover art image if available
-                                try:
-                                
-                                    if video_info['youtubeLink']:
-                                        st_player(video_info['youtubeLink'])
-                                    else:
-                                        st.image(video_info['coverArtImageLink'], caption="Cover Art")
+                        try:
+                            if video_info.get('youtubeLink'):
+                                st_player(video_info['youtubeLink'])
+                            else:
+                                st.image(video_info['coverArtImageLink'], caption="Cover Art")
+                        except Exception as e:
+                            print("Error displaying video content:", str(e))
                         
-                                
-                                    st.write(f"📷 {video_info['coverArt_description']}")
-                                    st.write(f"🛹 **Skaters:** {video_info['skaters']}")
-                                    st.subheader("🎥 Video Information:")
-                                    st.write(f"**Video Title:** {video_info['title']}")
-                                    st.write(f"**Video Length:** {video_info['fullLength']} minutes")
-                                    st.write(f"📽️ **Video Type:** {video_info['videoType']}")
-                                    # if video_info['youtubeLink']:
-                                    #     st.markdown(f"[🔗 YouTube Link]({video_info['youtubeLink']})")
-                                    #     st.video(video_info['youtubeLink'])
-                                    # else:
-                                    #     print("no link")
-                                    st.write(f"🏭 **Production:** {video_info['production']}")
-                                    st.write(f"📺 **Watch Online Description:** {video_info['watchOnlineDescription']}")
-                                    st.write(f"🛹 **Skater Cameo:** {video_info['skaterCameo']}")
-                                    st.write(f"📰 **Thrasher Cover:** {video_info['thrasherCover']}")
-                                    st.write(f"🌎 **Video Info:** {video_info['locations']}")
-                                    st.write(f"🎵 **Soundtracks:** {video_info['soundtrack']}")
+                        try:
+                            cover_art_description = video_info.get('coverArt_description', None)
+                            if cover_art_description:
+                                st.write(f"📷 {cover_art_description}")
+                        except Exception as e:
+                            print("Error displaying cover art description:", str(e))
+                        
+                        try:
+                            skaters = video_info.get('skaters', None)
+                            if skaters:
+                                st.write(f"🛹 **Skaters:** {skaters}")
+                        except Exception as e:
+                            print("Error displaying skaters:", str(e))
+                        
+                        try:
+                            title = video_info.get('title', None)
+                            if title:
+                                st.subheader("🎥 Video Information:")
+                                st.write(f"**Video Title:** {title}")
+                        except Exception as e:
+                            print("Error displaying video title:", str(e))
+                        
+                        try:
+                            full_length = video_info.get('fullLength', None)
+                            if full_length:
+                                st.write(f"**Video Length:** {full_length} minutes")
+                        except Exception as e:
+                            print("Error displaying video length:", str(e))
+                        
+                        try:
+                            video_type = video_info.get('videoType', None)
+                            if video_type:
+                                st.write(f"📽️ **Video Type:** {video_type}")
+                        except Exception as e:
+                            print("Error displaying video type:", str(e))
+                        
+                        try:
+                            production = video_info.get('production', None)
+                            if production:
+                                st.write(f"🏭 **Production:** {production}")
+                        except Exception as e:
+                            print("Error displaying production:", str(e))
+                        
+                        try:
+                            watch_online_description = video_info.get('watchOnlineDescription', None)
+                            if watch_online_description:
+                                st.write(f"📺 **Watch Online Description:** {watch_online_description}")
+                        except Exception as e:
+                            print("Error displaying watch online description:", str(e))
+                        
+                        try:
+                            skater_cameo = video_info.get('skaterCameo', None)
+                            if skater_cameo:
+                                st.write(f"🛹 **Skater Cameo:** {skater_cameo}")
+                        except Exception as e:
+                            print("Error displaying skater cameo:", str(e))
+                        
+                        try:
+                            thrasher_cover = video_info.get('thrasherCover', None)
+                            if thrasher_cover:
+                                st.write(f"📰 **Thrasher Cover:** {thrasher_cover}")
+                        except Exception as e:
+                            print("Error displaying Thrasher cover:", str(e))
+                        
+                        try:
+                            locations = video_info.get('locations', None)
+                            if locations:
+                                st.write(f"🌎 **Video Info:** {locations}")
+                        except Exception as e:
+                            print("Error displaying video locations:", str(e))
+                        
+                        try:
+                            soundtrack = video_info.get('soundtrack', None)
+                            if soundtrack:
+                                st.write(f"🎵 **Soundtracks:** {soundtrack}")
+                        except Exception as e:
+                            print("Error displaying soundtracks:", str(e))
 
-                                    
-                                except:
-                                    print("Data may not reflect recent changes in skateboarding")
-                                    continue
 
 
                         video_index += 1
