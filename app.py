@@ -43,18 +43,6 @@ search_text = st.text_input("Search for a Skate Video, Skater, Place, Company, P
 
 def get_semantic_results(qq):
     
-    where_filter = {
-      "operator": "Or",
-      "operands": [{
-            "path": ["wordCount"],
-            "operator": "GreaterThan",
-            "valueInt": 1000
-          }, {
-            "path": ["title"],
-            "operator": "Like",
-            "valueText": "*economy*",
-          }]
-    }
 
     normal_response = (
         client.query
