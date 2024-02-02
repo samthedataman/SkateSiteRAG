@@ -1,0 +1,6 @@
+[global]
+
+
+weaviate_key = "AD88gas7nFZKgmR1Yr0d084yvhI5YVe3a2yZ"
+openai_key = "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"
+weaviate_url = "https://pjokperctzqnvi34i1omg.c0.us-central1.gcp.weaviate.cloud"
