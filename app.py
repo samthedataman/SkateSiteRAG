@@ -118,10 +118,11 @@ if search_text:
                                 try:
                                     if video_info.get('youtubeLink'):
                                         st_player(video_info['youtubeLink'])
-                                    elif:
+                                    else:
                                         st.image(video_info['coverArtImageLink'], caption="Cover Art")
-                                    elif:
-                                        st.write(f"**Link to Video**: {video_info['youtubeLink']}")
+                                        st.write(f"**Link to Video**: {video_info.get('youtubeLink', 'N/A')}")
+                                except Exception as e:
+                                    print("Error displaying video content:", str(e))
                                         
                                 except Exception as e:
                                     print("Error displaying video content:", str(e))
