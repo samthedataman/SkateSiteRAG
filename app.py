@@ -38,7 +38,7 @@ st.set_page_config(page_title="Skate Video Search", layout="wide")
 st.title("Skate Video Search")
 
 # Search bar
-search_text = st.text_input("Search for a Skate Video", placeholder="Enter a video title or attribute")
+search_text = st.text_input("Search for a Skate Video, Skater, Place, Company, Product, or Song", placeholder="Enter a video title or attribute")
 
 def get_semantic_results(qq):
 
