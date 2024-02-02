@@ -88,8 +88,8 @@ if search_text:
                             with st.expander(f"{video_info['title']} ({video_info['videoType']})", expanded=True):
                                                         # Displaying the cover art image if available
                                 
-                                if video_info['coverArtImageLink']:
-                                    st.image(video_info['coverArtImageLink'], caption="Cover Art")
+                                if video_info['youtubeLink']:
+                                    st_player(video_info['youtubeLink']), caption="Cover Art")
                                 # YouTube and Skate Site Links
 
                                     # st.image(video_info['coverArtImageLink'], caption="Cover Art")
