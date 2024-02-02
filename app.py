@@ -103,25 +103,49 @@ if search_text:
     
                                         # st.image(video_info['coverArtImageLink'], caption="Cover Art")
                                     # YouTube and Skate Site Links
-    
-                                    st.write(f"{video_info['coverArt_description']}")
-    
-                                    st.write(f"**Skaters:** {video_info['skaters']}")
+
                                     st.subheader("Video Information:")
-                                    st.write(f"**Video Title:** {video_info['title']}")
-                                    st.write(f"**Video Length:** {video_info['fullLength']} minutes")
-                                    st.write(f"**Video Type:** {video_info['videoType']}")
-                                    # if video_info['youtubeLink']:
-                                    #     st.markdown(f"[YouTube Link]({video_info['youtubeLink']})")
-                                    #     st.video(video_info['youtubeLink'])
-                                    # else:
-                                    #   print("no link")
-                                    st.write(f"**Production:** {video_info['production']}")
-                                    st.write(f"**Watch Online Description:** {video_info['watchOnlineDescription']}")
-                                    st.write(f"**Skater Cameo:** {video_info['skaterCameo']}")
-                                    st.write(f"**Thrasher Cover:** {video_info['thrasherCover']}")
-                                    st.write(f"**Video Info:** {video_info['locations']}")
-                                    st.write(f"**Soundtracks:** {video_info['soundtrack']}")
+                                    st.write(f"🎥 **Video Title:** {video_info['title']}")
+                                    st.write(f"⏱️ **Video Length:** {video_info['fullLength']} minutes")
+                                    st.write(f"📽️ **Video Type:** {video_info['videoType']}")
+                                    
+                                    # Display the production information
+                                    st.subheader("Production Information:")
+                                    st.write(f"🏭 **Company:** {video_info['production']['Company']}")
+                                    st.write(f"📅 **Year:** {video_info['production']['Year']}")
+                                    
+                                    st.write(f"📺 **Watch Online Description:** {video_info['watchOnlineDescription']}")
+                                    st.write(f"🛹 **Skater Cameo:** {video_info['skaterCameo']}")
+                                    st.write(f"📰 **Thrasher Cover:** {video_info['thrasherCover']}")
+                                    
+                                    st.write(f"🌎 **Locations:** {video_info['locations']}")
+                                    
+                                    st.subheader("Soundtrack:")
+                                    st.write(f"🎵 **Soundtrack:** {video_info['soundtrack']}")
+
+
+
+
+
+                                
+                                    # st.write(f"{video_info['coverArt_description']}")
+    
+                                    # st.write(f"**Skaters:** {video_info['skaters']}")
+                                    # st.subheader("Video Information:")
+                                    # st.write(f"**Video Title:** {video_info['title']}")
+                                    # st.write(f"**Video Length:** {video_info['fullLength']} minutes")
+                                    # st.write(f"**Video Type:** {video_info['videoType']}")
+                                    # # if video_info['youtubeLink']:
+                                    # #     st.markdown(f"[YouTube Link]({video_info['youtubeLink']})")
+                                    # #     st.video(video_info['youtubeLink'])
+                                    # # else:
+                                    # #   print("no link")
+                                    # st.write(f"**Production:** {video_info['production']}")
+                                    # st.write(f"**Watch Online Description:** {video_info['watchOnlineDescription']}")
+                                    # st.write(f"**Skater Cameo:** {video_info['skaterCameo']}")
+                                    # st.write(f"**Thrasher Cover:** {video_info['thrasherCover']}")
+                                    # st.write(f"**Video Info:** {video_info['locations']}")
+                                    # st.write(f"**Soundtracks:** {video_info['soundtrack']}")
 
                                     
                                 except:
