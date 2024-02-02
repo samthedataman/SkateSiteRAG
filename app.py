@@ -47,8 +47,7 @@ def get_semantic_results(qq):
     normal_response = (
         client.query
         .get("SKATESITERAG2",
-         [
-        'title',
+         ['title',
         'fullLength',
         'videoType',
         'production',
@@ -63,11 +62,17 @@ def get_semantic_results(qq):
         'youtubeLink',
         'skateSiteLink'
         ])
-        .with_where( 
-            "operator": "Or",
-              "operands": [{"path": ["title"],"operator": "Like","valueText": f"*{qq}*"},
-                            {"path": ["production"],"operator": "Like","valueText": f"*{qq}*"},
-                            {"path": ["skaters"],"operator": "Like","valueText": f"*{qq}*"}].with_limit(1000).do()
+    .with_where({
+        "operator": "Or",
+        "operands": [
+            {"path": ["title"], "operator": "Like", "valueText": f"*{qq}*"},
+            {"path": ["production"], "operator": "Like", "valueText": f"*{qq}*"},
+            {"path": ["skaters"], "operator": "Like", "valueText": f"*{qq}*"}
+        ]
+    })
+    .with_limit(1000)
+    .do()
+)
     )
     response = client.query.get("SKATESITERAG2",
             [ 'title', 
