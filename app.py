@@ -88,7 +88,7 @@ if search_text:
                     if video_index < num_videos:
                         video_info = df.iloc[video_index]
                         with cols[metric_index]:
-                            with st.expander(f"{video_info['title']} ({video_info['videoType']})", expanded=True):
+                            with st.expander(f"{video_info['title']} ({video_info['videoType']}) [{video_info['production']}]", expanded=True):
                                                         # Displaying the cover art image if available
                                 try:
                                 
